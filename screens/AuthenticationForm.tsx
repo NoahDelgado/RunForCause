@@ -4,6 +4,11 @@ import axios from 'axios';
 import config from '../config.json';
 import Store from '../expo/Store';
 
+
+interface IMyProps {
+    store: Store;
+}
+
 type states = {
     username: string,
     password: string,
@@ -15,7 +20,7 @@ type states = {
  * @extends {Component<any, states>}
  * @description This class is used to authenticate the user.
  */
-export default class AuthenticationForm extends Component {
+export default class AuthenticationForm extends Component<IMyProps> {
 
     state: states = { username: '', password: '', error: '' };
     #store: Store;
@@ -24,11 +29,11 @@ export default class AuthenticationForm extends Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.#store = new Store();
+        this.#store = props.store;
         // If the user is already logged in, redirect to the home page.
         if (this.#store.get('token') != null) {
-            console.log('User is already logged in.');
-            // TODO : Redirect to the home page.
+            //redirect to home page
+
         }
     }
     /**
@@ -43,24 +48,27 @@ export default class AuthenticationForm extends Component {
      * @description: This function is called when the user clicks the submit button.
      */
     handleSubmit() {
-        this.state.error = '';
-        axios.post(config.apiUrl, {
+        // Delete error message
+        this.handleChange('error', '');
+
+        axios.post(config.apiUrlToken, {
             username: this.state.username,
             password: this.state.password
         }).then((response: { data: any; }) => {
-            return this.#store.save('token', response.data);
-        }).then(() => {
-            // TODO : Redirect to the home page.
-            console.log('User is logged in.');
+            return this.#store.save('token', response.data).
+                then(() => {
+                    this.context.setIsLogguedIn(true);
+                });
         }).catch((error: any) => {
-            this.state.error = error.response.data;
+            console.log(error);
+            this.handleChange('error', 'Email ou mot de passe incorrect');
         });
     }
 
     render() {
         return (
             <View style={styles.form} >
-                <Text  >Nom d'utilisateur</Text>
+                <Text  >Email</Text>
                 <TextInput style={styles.input} value={this.state.username} onChangeText={(text) => this.handleChange('username', text)} keyboardType={'email-address'} />
                 <Text>Mot de passe</Text>
                 <TextInput secureTextEntry={true} style={styles.input} value={this.state.password} onChangeText={(text) => this.handleChange('password', text)}></TextInput>
