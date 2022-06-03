@@ -8,4 +8,7 @@ export default class Store {
     async get(key: string) {
         return await SecureStore.getItemAsync(key);
     }
+    async remove(key: string) {
+        return await SecureStore.deleteItemAsync(key);
+    }
 }
