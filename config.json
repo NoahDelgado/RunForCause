@@ -1,4 +1,4 @@
 {
-    "apiUrl": "https://mockapi.mycpnv.ch/api/rfc/mytoken",
-    "method": "POST"
+    "apiUrlToken": "https://mockapi.mycpnv.ch/api/rfc/mytoken?",
+    "apiUrlCheckToken": "https://mockapi.mycpnv.ch/api/rfc/me?"
 }
