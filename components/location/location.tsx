@@ -29,11 +29,18 @@ export default function LocationComponent() {
 
     const sendLocation = async (location: Location.LocationObject) => {
       if (await AsyncStorage.getItem('isWatching') === 'false') return;
-      await axios.post(config.api_url + '/location',
+      console.log(config.api_url + '/location?');
+      let authToken = await AsyncStorage.getItem('auth-token');
+      await axios.post(config.api_url + '/location?',
           {
               lat: location.coords.latitude,
               long: location.coords.longitude,
-          }).catch(error => {
+          }, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Authorization": "Bearer " + authToken,
+            }
+        }).catch(error => {
           console.log(error);
       });
   }
