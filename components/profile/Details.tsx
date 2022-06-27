@@ -22,23 +22,25 @@ export default function Profile() {
             <View>
                 <View style={styles.header}>
                     <View style={styles.headerContent}>
-                        <Image style={styles.avatar} source={{ uri: `${config.img_url}/${user?.picture}` }} />
-                        
-                        <Text style={styles.name}>{user?.name}</Text>
-                        <Text style={styles.userInfo}>{user?.email}</Text>
+                        <Image style={styles.avatar} source={{ uri: `${config.img_url}/${user?.picture}` }} />                        
                     </View>
                 </View>
 
                 <View style={styles.body}>
                     <View style={styles.item}>
-                        <Ionicons style={styles.icon} name="phone" size={30} />
+                        <Ionicons style={styles.icon} name="man" size={30} />
+                        <Text style={styles.info}>{user?.name ? user?.name : 'No name available'}</Text>
+                    </View>
+                    <View style={styles.item}>
+                        <Ionicons style={styles.icon} name="mail" size={30} />
+                        <Text style={styles.info}>{user?.email ? user?.email : 'No mail available'}</Text>
+                    </View>
+                    <View style={styles.item}>
+                        <Ionicons style={styles.icon} name="phone-portrait-outline" size={30} />
                         <Text style={styles.info}>{user?.phone ? user?.phone : 'No phone number available'}</Text>
                     </View>
 
-                    <View style={styles.item}>
-                        <Ionicons style={styles.icon} name="exit" size={30} />
-                        <Text style={styles.info}>Logout</Text>
-                    </View>
+                  
                 </View>
             </View>
         </SafeAreaView>
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
         height: 130,
         borderRadius: 63,
         borderWidth: 4,
-        borderColor: "white",
+        borderColor: "#e3755e",
         marginBottom: 10,
     },
     name: {
@@ -78,15 +80,14 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     body: {
-        backgroundColor: "#778899",
+        backgroundColor: "#e3755e",
         height: '100%',
-        // alignItems: 'center',
         width: '100%',
     },
     item: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        paddingLeft: '20%',
+        paddingLeft: '5%',
         left: 0,
     },
     infoContent: {

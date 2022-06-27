@@ -7,7 +7,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { DIMENSIONS } from '../../app/styles/dimensions';
-import { DimensionsWindow } from 'react-native';
+import { Dimensions } from 'react-native';
 import { config } from "../../config";
 import { UserContext } from '../../contexts/userContext';
 import MapView from 'react-native-maps';
@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
   },
   map: {
-      width: DimensionsWindow.get('window').width,
-      height: DimensionsWindow.get('window').height,
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
   },
   button: {
       position: 'absolute',
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 5,
-      backgroundColor: 'black',
+      backgroundColor: '#e15638',
   },
   text: {
       fontSize: 15,

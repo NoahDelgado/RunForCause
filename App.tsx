@@ -33,25 +33,25 @@ const styles = StyleSheet.create({
     fontSize: DIMENSIONS.fontSize * 2,
   },
   label: {
-    marginTop: 20,
+    marginTop: 5,
     marginLeft: 5,
   },
   button: {
     marginTop: 20,
     color: 'white',
     height: 40,
-    backgroundColor: '#ec5990',
+    backgroundColor: '#e15638',
     borderRadius: 4,
     marginLeft: 5,
     marginRight: 5,
   },
   container: {
-    flex: 1,
     padding: 8,
+    flex: 1,
+    justifyContent: 'center',
   },
   input: {
     borderRadius: DIMENSIONS.inputBorderRadius,
-    height: DIMENSIONS.height + 5,
     marginTop: 5,
     marginRight: 5,
     marginLeft: 5,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   multiline: {
-    height: DIMENSIONS.height + 20,
+    height: DIMENSIONS.height + 30,
     textAlignVertical: 'top',
   },
   error: {

@@ -55,8 +55,7 @@ const CameraModule = (props) => {
             visible={true}
             onRequestClose={() => {
                 props.setModalVisible();
-            }}
-        >
+            }}>
             <Camera
                 style={{ flex: 1 }}
                 ratio="16:9"
@@ -179,7 +178,7 @@ export default function ImagePicker(props) {
                 />
             </View>
             <Button
-                style={{ width: "30%", marginTop: 16 }}
+                style={{ width: "30%", marginTop: 16, backgroundColor: '#e15638' }}
                 icon="camera"
                 mode="contained"
                 onPress={() => {
