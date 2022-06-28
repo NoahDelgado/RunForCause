@@ -21,3 +21,4 @@ Then, start expo
 ```sh
 expo start
 ```
+the app need to be run on androide 11 with google play services installed 
