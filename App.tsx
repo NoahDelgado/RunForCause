@@ -186,10 +186,7 @@ export default function App({ navigation }) {
     () => ({
       signIn: async (data) => {
         let authToken: string;
-        // In a production app, we need to send some data (usually username, password) to server and get a token
-        // We will also need to handle errors if sign in failed
-        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
-        // In the example, we'll use a dummy token
+
         axios.post(config.api_url + "/mytoken", {
           'username': data.email,
           'password': data.password
@@ -197,12 +194,8 @@ export default function App({ navigation }) {
           authToken = response.data;
           await AsyncStorage.setItem('auth-token', authToken);
           await AsyncStorage.setItem('isWatching', 'False');
-
-          //this.setState({ message: 'User successfully authenticated!' });
         }).catch(err => {
           if (err.response.status === 401) {
-            //setMessage('Authentication failed! Please check your credentials and try again.');
-            // setError("test", { type: "focus" }, { shouldFocus: true });
           }
         }).finally(() => {
           dispatch({ type: 'SIGN_IN', token: authToken });
@@ -210,11 +203,6 @@ export default function App({ navigation }) {
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async (data) => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
-        // In the example, we'll use a dummy token
-
         dispatch({ type: 'SIGN_IN', token: 'auth-token' });
       },
     }),
