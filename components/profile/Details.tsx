@@ -1,28 +1,54 @@
 import React, { useContext, useEffect } from 'react';
 import {
     Image, StyleSheet,
-    Text, View
+    Text, View, Alert, Button
 } from 'react-native';
+import axios from 'axios';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { DIMENSIONS } from '../../app/styles/dimensions';
 import { config } from "../../config";
 import { UserContext } from '../../contexts/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Profile() {
     let { user, setUser } = useContext(UserContext);
-    
+
+    const deleteTracking = async () => {
+        let authToken = await AsyncStorage.getItem('auth-token');
+        await axios.delete(config.api_url + '/location?', {
+            headers: {
+                "Authorization": "Bearer " + authToken,
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+
+    }
+    const showAlert = () =>
+        Alert.alert(
+            "Delete Tracking",
+            "Are you sure you want to delete your tracking?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                },
+                { text: "Confirme", onPress: deleteTracking },
+            ],
+        );
+
     useEffect(() => {
     }, []);
 
     return (
-        
+
         <SafeAreaView style={styles.SafeAreaView}>
-        {console.log(user)}
             <View>
                 <View style={styles.header}>
                     <View style={styles.headerContent}>
-                        <Image style={styles.avatar} source={{ uri: `${config.img_url}/${user?.picture}` }} />                        
+                        {console.log(user)}
+                        <Image style={styles.avatar} source={{ uri: `${config.img_url}/${user?.picture}` }} />
                     </View>
                 </View>
 
@@ -39,8 +65,12 @@ export default function Profile() {
                         <Ionicons style={styles.icon} name="phone-portrait-outline" size={30} />
                         <Text style={styles.info}>{user?.phone ? user?.phone : 'No phone number available'}</Text>
                     </View>
-
-                  
+                    <View style={styles.button}>
+                        <Button
+                            title="Delete Tracking"
+                            onPress={showAlert}
+                        />
+                    </View>
                 </View>
             </View>
         </SafeAreaView>
@@ -132,13 +162,13 @@ const styles = StyleSheet.create({
         margin: DIMENSIONS.margin,
     },
     button: {
-        margin: DIMENSIONS.margin,
-        height: DIMENSIONS.height,
-        with: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontWeight: 'bold',
-        backgroundColor: '#000',
+        marginTop: 20,
+        color: 'white',
+        height: 40,
+        backgroundColor: '#e15638',
+        borderRadius: DIMENSIONS.inputBorderRadius,
+        marginLeft: 5,
+        marginRight: 5,
     },
     form: {
         width: '80%',
