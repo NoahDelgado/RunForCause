@@ -87,7 +87,7 @@ export default function LocationComponent() {
                 loadingEnabled={true}
             />
             <Pressable style={styles.button} onPress={async () => {
-                await saveWatchingState(`${(!await AsyncStorage.getItem('isWatching') === 'true')}`);
+                await saveWatchingState(`${!(await AsyncStorage.getItem('isWatching') === 'true')}`);
                 toggleWatching();
             }}>
 
