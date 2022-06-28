@@ -12,3 +12,4 @@ web-build/
 config.ts
 .DS_Store
 config.js
+.vscode
